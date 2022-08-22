@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" th:href="@{/materialize/css/materialize.min.css}"  media="screen,projection"/>
+	<link type="text/css" rel="stylesheet" th:href="@{/css/navbar.css}" />
+	<link type="text/css" rel="stylesheet" th:href="@{/iconpacks/religion/flaticon.css}" />
+   <script type="module" th:src="@{/js/tabs_and_auto.js}"></script>
+   <title>Create a New Leader</title>
+</head>
+<body>
+<div class="navbar-fixed">
+	<nav>
+		<div class="nav-wrapper">
+			<a href="/home" class="brand-logo center tooltipped" data-position="bottom" data-tooltip="Return to Homepage"><i class="medium material-icons ">home</i></a>
+			<ul class="left hide-on-small-only">
+				<li><a href="/leader/index" class="tooltipped" data-position="bottom" data-tooltip="View all Leaders"><i class="medium material-icons ">record_voice_over</i></a></li>
+				<li><a href="/civilization/index" class="tooltipped" data-position="bottom" data-tooltip="View all Civilizations"><i class="medium material-icons ">account_balance</i></a></li>
+				<li><a href="/combination/index" class="tooltipped" data-position="bottom" data-tooltip="View all Combinations"><i class="medium material-icons ">merge</i></a></li>
+			</ul>
+			<ul class="right hide-on-small-only">
+				<li sec:authorize="isAuthenticated()"><a href="javascript: document.logoutForm.submit()" class="dropdown-toggle tooltipped" data-position="bottom" data-tooltip="Logout"><i class="medium material-icons ">logout</i></a></li>
+			</ul>
+			<form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+				<input hidden="true" type="submit" value="Sign Out" />	
+			</form>
+		</div>
+	</nav>
+</div>
+<div class="container">
+	<h1 class="center row">Create a Custom Leader</h1>
+	<div class="row">
+		<form class="col s12" action="#" id="form" th:action="@{/leader/create}"  method="post" th:object="${leader}">
+			<div class="row">
+				<div class="input-field col s6 offset-s3">
+					<input id="name" placeholder="Victoria" type="text" class="validate" th:field="*{name}" />
+					<label for="name">Name</label>
+				</div>
+				<div class="input-field col s12">
+					<input placeholder="Pax Britannica" type="text" class="validate" th:field="*{bonusName}" />
+					<label for="bonusName">Bonus Name</label>
+				</div>
+				<div class="input-field col s12">
+					<textarea data-length="800" class="materialize-textarea" th:field="*{bonusDescription}" placeholder="The first city founded on each continent other than England's..."></textarea>
+					<label for="bonusDescription">Bonus Details</label>
+				</div>
+				<div class="input-field col s12">
+					<input placeholder="Sun Never Sets" type="text" class="validate" th:field="*{agendaName}" />
+					<label for="agendaName">Agenda Name</label>
+				</div>
+				<div class="input-field col s12">
+					<textarea data-length="800" class="materialize-textarea" th:field="*{agendaDescription}" placeholder="Likes civilizations who have a city on her home continent, and..."></textarea>
+					<label for="agendaDescription">Agenda Details</label>
+				</div>
+				<div class="input-field col s6 offset-s3">
+				    <select class="icons center" th:field="*{religion}">
+				      <option value="No Preference" data-icon="/images/praying.svg" class="left" selected>No Preference</option>
+				      <option value="Buddhism" data-icon="/images/buddhism.svg" class="left">Buddhism</option>
+				      <option value="Catholicism" data-icon="/images/celtic-cross.svg" class="left">Catholicism</option>
+				      <option value="Hinduism" data-icon="/images/om.svg" class="left">Hinduism</option>
+				      <option value="Islam" data-icon="/images/islam.svg" class="left">Islam</option>
+				      <option value="Judaism" data-icon="/images/judaism.svg" class="left">Judaism</option>
+				      <option value="Eastern Orthodoxy" data-icon="/images/cross.svg" class="left">Eastern Orthodoxy</option>
+				      <option value="Protestantism" data-icon="/images/cross-1.svg" class="left">Protestantism</option>
+				      <option value="Shinto" data-icon="/images/shinto.svg" class="left">Shinto</option>
+				      <option value="Sikhism" data-icon="/images/sikhism.svg" class="left">Sikhism</option>
+				      <option value="Taoism" data-icon="/images/taoism.svg" class="left">Taoism</option>
+				      <option value="Zoroastrianism" data-icon="/images/faravahar.svg" class="left">Zoroastrianism</option>
+				    </select>
+				    <label></label>
+				</div>
+			</div>
+			<div class="row">
+				<button class="btn waves-effect waves-lift center col s2 offset-s5" type="submit" form="form" th:formaction="@{/leader/create}" th:object="${leader}">Submit
+				<i class="material-icons right">send</i>
+				</button>
+			</div>
+		</form>
+	</div>
+
+
+</div>
+<script type="text/javascript" th:src="@{/materialize/js/materialize.min.js}"></script>
+</body>
+</html>

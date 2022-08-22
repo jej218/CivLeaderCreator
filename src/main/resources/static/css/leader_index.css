@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+div.card-name-container {
+	display: flex;
+	justify-content: flex-start;
+	gap: 15px;
+	align-items: center;
+}
+
+span.card-title, span.user-name {
+	margin-bottom: 0px !important;
+}
+
+div.card-religion-container {
+	display: flex;
+	justify-content: flex-start;
+	gap: 27px;
+	align-items: center;
+	
+}
+
+div.edit-delete-box {
+	display: flex;
+	justify-content: center;
+}
+
+div.user-info-box {
+	display: flex;
+	justify-content: flex-start;
+	gap: 15px;
+	align-items: center;
+}

@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+.collapsible-header {
+	justify-content: center;
+}
+
+
+.custom-collapsible-header {
+	gap: 30px;
+}
+
+i.medium {
+	font-size: 4rem !important;
+}

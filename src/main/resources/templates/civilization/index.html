@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+   <meta charset="UTF-8">
+   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+   <link type="text/css" rel="stylesheet" th:href="@{/materialize/css/materialize.min.css}"  media="screen,projection"/>
+   <link type="text/css" rel="stylesheet" th:href="@{/css/navbar.css}" />
+	<link type="text/css" rel="stylesheet" th:href="@{/css/leader_index.css}" />
+   <script type="module" th:src="@{/js/tabs_and_auto.js}"></script>
+   <title>View All Civilizations</title>
+</head>
+<body>
+<div class="navbar-fixed">
+	<nav>
+		<div class="nav-wrapper">
+			<a href="/home" class="brand-logo center tooltipped" data-position="bottom" data-tooltip="Return to Homepage"><i class="medium material-icons ">home</i></a>
+			<ul class="left hide-on-small-only">
+				<li><a href="/leader/index" class="tooltipped" data-position="bottom" data-tooltip="View all Leaders"><i class="medium material-icons ">record_voice_over</i></a></li>
+				<li class="active"><a href="/civilization/index" class="tooltipped" data-position="bottom" data-tooltip="View all Civilizations"><i class="medium material-icons ">account_balance</i></a></li>
+				<li><a href="/combination/index" class="tooltipped" data-position="bottom" data-tooltip="View all Combinations"><i class="medium material-icons ">merge</i></a></li>
+			</ul>
+			<ul class="right hide-on-small-only">
+				<li sec:authorize="isAuthenticated()"><a href="javascript: document.logoutForm.submit()" class="dropdown-toggle tooltipped" data-position="left" data-tooltip="Logout"><i class="medium material-icons ">logout</i></a></li>
+			</ul>
+			<form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+				<input hidden="true" type="submit" value="Sign Out" />	
+			</form>
+		</div>
+	</nav>
+</div>
+<div class="container">
+<h1 class="center">Civilizations</h1>
+<div class="center row">
+	<a class="waves-effect waves-light btn" href="/civilization/new">Create a Custom Civilization</a>
+</div>
+	<div class="row" th:each="civilization : ${civilizations}">
+		<div class="col s12">
+			<div class="card blue-grey darken-1 hoverable">
+				<div class="card-content white-text">
+					<div class="card-content left">
+						<div class="card-name-container">
+	                    	<i class="small material-icons">account_balance</i>
+	                        <span class="card-title" th:text="${civilization.name}"></span>
+                    	</div>
+                    	<div class="card-religion-container">
+							<p th:text="${civilization.demonym}"></p>
+                    	</div>
+					</div>
+					<div class="card-content right">
+						<i th:if="${civilization.userFirstName == null}" class="medium material-icons">person_off</i>
+                    	<div th:unless="${civilization.userFirstName == null}" class="user-info-holder" >
+                    		<div class="user-info-box">
+	                    		<i class="small material-icons ">person</i>
+		                        <span class="user-name" th:text="${civilization.userFirstName} + ' ' + ${civilization.userLastName}"></span>
+                    		</div>
+	                        <div th:if="${#authentication.name.equals(civilization.userEmail)}" class="edit-delete-box" >
+	                          	<a th:href="@{/civilization/delete/{id}(id=${civilization.id})}" class="tooltipped" data-position="bottom" data-tooltip="Delete this Civilization">
+	                          		<i class="small material-icons center">delete</i>
+	                          	</a>
+	                        </div>
+                    	</div>
+	                    	
+					</div>
+				</div>
+				<div class="card-tabs">
+                   <ul class="tabs tabs-fixed-width">
+                       <li class="tab"><a th:href="'#' + ${civilization.id} + '1'" class="active" th:text="${civilization.abilityName}"></a></li>
+                       <li class="tab"><a th:href="'#' + ${civilization.id} + '2'" th:text="${civilization.unitName}"></a></li>
+                       <li class="tab"><a th:href="'#' + ${civilization.id} + '3'" th:text="${civilization.infrastructureName}"></a></li>
+                   </ul>
+               </div>
+               <div class="card-content grey lighten-4">
+                   <div th:id="${civilization.id} + '1'" th:text="${civilization.abilityDescription}"></div>
+                   <div th:id="${civilization.id} + '2'" th:text="${civilization.unitDescription}"></div>
+                   <div th:id="${civilization.id} + '3'" th:text="${civilization.infrastructureDescription}"></div>
+               </div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+</div>
+<script type="text/javascript" th:src="@{/materialize/js/materialize.min.js}"></script>
+</body>
+</html>

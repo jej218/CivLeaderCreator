@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" th:href="@{/materialize/css/materialize.min.css}"  media="screen,projection"/>
+	<link type="text/css" rel="stylesheet" th:href="@{/css/navbar.css}" />
+   <script type="module" th:src="@{/js/tabs_and_auto.js}"></script>
+    <title>Welcome to Civ VI Leader Creator</title>
+</head>
+<body>
+<div class="navbar-fixed">
+	<nav>
+		<div class="nav-wrapper">
+			<a href="/home" class="brand-logo center tooltipped" data-position="bottom" data-tooltip="Return to Homepage"><i class="medium material-icons ">home</i></a>
+			<ul class="left hide-on-small-only">
+				<li><a href="/leader/index" class="tooltipped" data-position="bottom" data-tooltip="View all Leaders"><i class="medium material-icons ">record_voice_over</i></a></li>
+				<li><a href="/civilization/index" class="tooltipped" data-position="bottom" data-tooltip="View all Civilizations"><i class="medium material-icons ">account_balance</i></a></li>
+				<li><a href="/combination/index" class="tooltipped" data-position="bottom" data-tooltip="View all Combinations"><i class="medium material-icons ">merge</i></a></li>
+			</ul>
+			<ul class="right hide-on-small-only">
+				<li sec:authorize="isAuthenticated()"><a href="javascript: document.logoutForm.submit()" class="dropdown-toggle tooltipped" data-position="bottom" data-tooltip="Logout"><i class="medium material-icons ">logout</i></a></li>
+			</ul>
+			<form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+				<input hidden="true" type="submit" value="Sign Out" />	
+			</form>
+		</div>
+	</nav>
+</div>
+<div class="container">
+<h1 class="center">Welcome to Civ VI Leader Creator!</h1>
+<h3>Mix and Match Civs and Leaders, checkout other player's custom Civs and Leaders, or create your own.</h3>
+
+
+
+
+</div>
+
+<script type="text/javascript" th:src="@{/materialize/js/materialize.min.js}"></script>
+</body>
+</html>

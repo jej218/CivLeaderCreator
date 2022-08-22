@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+   <meta charset="UTF-8">
+   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+   <link type="text/css" rel="stylesheet" th:href="@{/materialize/css/materialize.min.css}"  media="screen,projection"/>
+	<link type="text/css" rel="stylesheet" th:href="@{/css/combination_index.css}" />
+   <script type="module" th:src="@{/js/tabs_and_auto.js}"></script>
+   <title>View All Combinations</title>
+</head>
+<body>
+<div class="navbar-fixed">
+	<nav>
+		<div class="nav-wrapper">
+			<a href="/home" class="brand-logo center tooltipped" data-position="bottom" data-tooltip="Return to Homepage"><i class="medium material-icons ">home</i></a>
+			<ul class="left hide-on-small-only">
+				<li><a href="/leader/index" class="tooltipped" data-position="bottom" data-tooltip="View all Leaders"><i class="medium material-icons ">record_voice_over</i></a></li>
+				<li><a href="/civilization/index" class="tooltipped" data-position="bottom" data-tooltip="View all Civilizations"><i class="medium material-icons ">account_balance</i></a></li>
+				<li class="active"><a href="/combination/index" class="tooltipped" data-position="bottom" data-tooltip="View all Combinations"><i class="medium material-icons ">merge</i></a></li>
+			</ul>
+			<ul class="right hide-on-small-only">
+				<li sec:authorize="isAuthenticated()"><a href="javascript: document.logoutForm.submit()" class="dropdown-toggle tooltipped" data-position="left" data-tooltip="Logout"><i class="medium material-icons ">logout</i></a></li>
+			</ul>
+			<form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+				<input hidden="true" type="submit" value="Sign Out" />	
+			</form>
+		</div>
+	</nav>
+</div>
+<div class="container">
+<h1 class="center">Combinations</h1>
+<div class="center row">
+	<a class="waves-effect waves-light btn" href="/combination/new">Create a Custom Combination</a>
+</div>
+<div class="row">
+</div>
+<ul class="collapsible popout col s6" th:each="combination : ${combinations}" th:style="'color:' + ${combination.innerColorHexCode}">
+	<li th:style="'background-color:' + ${combination.outerColorHexCode} + '; color:' + ${combination.innerColorHexCode}">
+		<div class="collapsible-header custom-collapsible-header" th:style="'background-color:' + ${combination.outerColorHexCode}" >
+			<div class="collapsible-header-child valign-wrapper">
+				<i class="material-icons">assignment_ind</i>
+				<span th:text="${combination.leaderName}"></span>
+			</div>
+			<div class="collapsible-header-child valign-wrapper">
+				<i class="material-icons">satellite</i>
+				<span th:text="${combination.civName}"></span>
+			</div>
+			<div th:if="${#authentication.name.equals(combination.userEmail)}" class="collapsible-header-child valign-wrapper" >
+                <a th:href="@{/combination/delete/{id}(id=${combination.id})}" class="tooltipped" data-position="bottom" data-tooltip="Delete this Combination">
+                	<i class="material-icons">delete</i>
+                </a>
+            </div>
+		</div>
+		<div class="collapsible-body">
+			<span th:text="${combination.leaderReligion} + ' - ' + ${combination.civDemonym} + ' - Jersey colors are ' + ${combination.outerColorName} + ' and ' + ${combination.innerColorName}"></span>
+		</div>
+	</li>
+	<li th:style="'background-color:' + ${combination.outerColorHexCode}">
+		<div class="collapsible-header" th:style="'background-color:' + ${combination.outerColorHexCode}">
+			<i class="material-icons">group_add</i>
+			<span th:text="${combination.leaderBonusName}"></span>
+		</div>
+		<div class="collapsible-body">
+			<span th:text="'Leader Bonus - ' + ${combination.leaderBonusDescription}"></span>
+		</div>
+	</li>
+	<li th:style="'background-color:' + ${combination.outerColorHexCode}">
+		<div th:style="'background-color:' + ${combination.outerColorHexCode}" class="collapsible-header">
+			<i class="material-icons">assignment</i>
+			<span th:text="${combination.leaderAgendaName}"></span>
+		</div>
+		<div class="collapsible-body">
+			<span th:text="'Leader Agenda - ' + ${combination.leaderAgendaDescription}"></span>
+		</div>
+	</li>
+	<li th:style="'background-color:' + ${combination.outerColorHexCode}">
+		<div th:style="'background-color:' + ${combination.outerColorHexCode}" class="collapsible-header" >
+			<i class="material-icons">assistant</i>
+			<span th:text="${combination.civAbilityName}"></span>
+		</div>
+		<div class="collapsible-body">
+			<span th:text="'Civilization Ability - ' + ${combination.civAbilityDescription}"></span>
+		</div>
+	</li>
+	<li th:style="'background-color:' + ${combination.outerColorHexCode}">
+		<div th:style="'background-color:' + ${combination.outerColorHexCode}" class="collapsible-header" >
+			<i class="material-icons">directions_walk</i>
+			<span th:text="${combination.civUnitName}"></span>
+		</div>
+		<div class="collapsible-body">
+			<span th:text="'Unique Unit - ' + ${combination.civUnitDescription}"></span>
+		</div>
+	</li>
+	<li th:style="'background-color:' + ${combination.outerColorHexCode}">
+		<div th:style="'background-color:' + ${combination.outerColorHexCode}" class="collapsible-header" >
+			<i class="material-icons">location_city</i>
+			<span th:text="${combination.civInfrastructureName}"></span>
+		</div>
+		<div class="collapsible-body">
+			<span th:text="'Unique Infrastructure - ' + ${combination.civInfrastructureDescription}"></span>
+		</div>
+	</li>
+</ul>
+
+
+
+</div>
+<script type="text/javascript" th:src="@{/materialize/js/materialize.min.js}"></script>
+</body>
+</html>

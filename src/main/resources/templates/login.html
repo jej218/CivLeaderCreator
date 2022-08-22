@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" th:href="@{/materialize/css/materialize.min.css}"  media="screen,projection"/>
+    <script type="module" th:src="@{/js/login.js}"></script> 
+	<link type="text/css" rel="stylesheet" th:href="@{/css/navbar.css}" />
+    <title>Login to Site</title>
+</head>
+<body>
+<div class="navbar-fixed">
+	<nav>
+		<div class="nav-wrapper">
+			<a href="/" class="brand-logo center tooltipped" data-position="bottom" data-tooltip="Return to Homepage"><i class="medium material-icons ">home</i></a>
+		</div>
+	</nav>
+</div>
+<div class="container">
+
+	<h2 class="center">Log In</h2>
+	<div th:if="${param.error}" id="modal1" class="modal">
+	    <div class="modal-content center">
+       		<h4>Login Unsuccessful</h4>
+       		<br>
+        	<p class="red-text">Email or password invalid.</p>
+        	<p class="red-text">Please try Again</p>
+	    </div>
+	    <div class="modal-footer">
+	    	<a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+	    </div>
+   </div>
+	<div class="row">
+		<form action="#" th:action="@{/login}" method="post" class="col s12" id="form">
+			<div class="row">
+				<div class="input-field col s6 offset-s3">
+					<input type="email" class="validate" id="email" name="email"/>
+					<label for="email">Email</label>
+
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s6 offset-s3">
+					<input type="password" class="validate" id="password" name="password" />
+					<label for="password">Password</label>
+				</div>
+			</div>
+			<div class="row">
+				<button class="btn waves-effect waves-lift center col s2 offset-s5" type="submit" form="form" th:formaction="@{/login}">Submit
+				<i class="material-icons right">send</i>
+				</button>
+			</div>
+		</form>
+	</div>
+
+</div>
+<script type="text/javascript" th:src="@{/materialize/js/materialize.min.js}"></script>
+</body>
+</html>

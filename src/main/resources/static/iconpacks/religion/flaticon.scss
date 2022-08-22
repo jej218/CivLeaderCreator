@@ -1,0 +1,77 @@
+$flaticon-font: "flaticon";
+
+@font-face {
+    font-family: $flaticon-font;
+    src: url("./flaticon.ttf?c3b085a34960a46b8e2c68f98d682b77") format("truetype"),
+url("./flaticon.woff?c3b085a34960a46b8e2c68f98d682b77") format("woff"),
+url("./flaticon.woff2?c3b085a34960a46b8e2c68f98d682b77") format("woff2"),
+url("./flaticon.eot?c3b085a34960a46b8e2c68f98d682b77#iefix") format("embedded-opentype"),
+url("./flaticon.svg?c3b085a34960a46b8e2c68f98d682b77#flaticon") format("svg");
+}
+
+i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
+    font-family: flaticon !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+$flaticon-map: (
+    "om": "\f101",
+    "islam": "\f102",
+    "sikhism": "\f103",
+    "taoism": "\f104",
+    "celtic-cross": "\f105",
+    "judaism": "\f106",
+    "confucianism": "\f107",
+    "buddhism": "\f108",
+    "faravahar": "\f109",
+    "praying": "\f10a",
+    "shinto": "\f10b",
+    "cross": "\f10c",
+    "cross-1": "\f10d",
+);
+
+.flaticon-om:before {
+    content: map-get($flaticon-map, "om");
+}
+.flaticon-islam:before {
+    content: map-get($flaticon-map, "islam");
+}
+.flaticon-sikhism:before {
+    content: map-get($flaticon-map, "sikhism");
+}
+.flaticon-taoism:before {
+    content: map-get($flaticon-map, "taoism");
+}
+.flaticon-celtic-cross:before {
+    content: map-get($flaticon-map, "celtic-cross");
+}
+.flaticon-judaism:before {
+    content: map-get($flaticon-map, "judaism");
+}
+.flaticon-confucianism:before {
+    content: map-get($flaticon-map, "confucianism");
+}
+.flaticon-buddhism:before {
+    content: map-get($flaticon-map, "buddhism");
+}
+.flaticon-faravahar:before {
+    content: map-get($flaticon-map, "faravahar");
+}
+.flaticon-praying:before {
+    content: map-get($flaticon-map, "praying");
+}
+.flaticon-shinto:before {
+    content: map-get($flaticon-map, "shinto");
+}
+.flaticon-cross:before {
+    content: map-get($flaticon-map, "cross");
+}
+.flaticon-cross-1:before {
+    content: map-get($flaticon-map, "cross-1");
+}

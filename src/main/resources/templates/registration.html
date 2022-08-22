@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" th:href="@{/materialize/css/materialize.min.css}"  media="screen,projection"/>
+    <script type="module" th:src="@{/js/tabs_and_auto.js}"></script>
+	<link type="text/css" rel="stylesheet" th:href="@{/css/navbar.css}" />
+   <title>Register</title>
+</head>
+<body>
+<div class="navbar-fixed">
+	<nav>
+		<div class="nav-wrapper">
+			<a href="/" class="brand-logo center tooltipped" data-position="bottom" data-tooltip="Return to Homepage"><i class="medium material-icons ">home</i></a>
+		</div>
+	</nav>
+</div>
+<div class="container">
+	<h2 class="center">Register</h2>
+	<div class="row">
+		<p class="center-align">Enter your details to create an account.<p>
+	</div>
+	<div class="row">
+		<form action="#" th:action="@{/register}" th:object="${userDto}" method="post" id="userDto">
+			<div class="row">
+				<div class="input-field col s6 offset-s3">
+					<input type="email" class="validate" id="email" th:field="*{email}" />
+					<label for="email">Email</label>
+				</div>
+				<div class="input-field col s6 offset-s3">
+					<input type="text" class="validate" id="firstname" th:field="*{firstName}"/>
+					<label for="firstname">First Name</label>
+				</div>
+				<div class="input-field col s6 offset-s3">
+					<input type="text" class="validate" id="lastname" th:field="*{lastName}"/>
+					<label for="lastname">Last Name</label>
+				</div>
+				<div class="input-field col s6 offset-s3">
+					<input type="password" class="validate" id="password" th:field="*{password}" />
+					<label for="password">password</label>
+				</div>
+				<div class="row">
+					<button class="btn waves-effect waves-lift center col s2 offset-s5" type="submit" form="userDto" name="action" th:formaction="@{/register}" th:object="${userDto}">Submit
+					<i class="material-icons right">send</i>
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<script type="text/javascript" th:src="@{/materialize/js/materialize.min.js}"></script>
+</body>
+</html>

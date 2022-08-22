@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" th:href="@{/materialize/css/materialize.min.css}"  media="screen,projection"/>
+	<link type="text/css" rel="stylesheet" th:href="@{/css/navbar.css}" />
+   <script type="module" th:src="@{/js/tabs_and_auto.js}"></script>
+   <title>Create a New Civilization</title>
+</head>
+<body>
+<div class="navbar-fixed">
+	<nav>
+		<div class="nav-wrapper">
+			<a href="/home" class="brand-logo center tooltipped" data-position="bottom" data-tooltip="Return to Homepage"><i class="medium material-icons ">home</i></a>
+			<ul class="left hide-on-small-only">
+				<li><a href="/leader/index" class="tooltipped" data-position="bottom" data-tooltip="View all Leaders"><i class="medium material-icons ">record_voice_over</i></a></li>
+				<li><a href="/civilization/index" class="tooltipped" data-position="bottom" data-tooltip="View all Civilizations"><i class="medium material-icons ">account_balance</i></a></li>
+				<li><a href="/combination/index" class="tooltipped" data-position="bottom" data-tooltip="View all Combinations"><i class="medium material-icons ">merge</i></a></li>
+			</ul>
+			<ul class="right hide-on-small-only">
+				<li sec:authorize="isAuthenticated()"><a href="javascript: document.logoutForm.submit()" class="dropdown-toggle tooltipped" data-position="bottom" data-tooltip="Logout"><i class="medium material-icons ">logout</i></a></li>
+			</ul>
+			<form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+				<input hidden="true" type="submit" value="Sign Out" />	
+			</form>
+		</div>
+	</nav>
+</div>
+<div class="container">
+	<h1 class="center row">Create a Custom Civilization</h1>
+	<div class="row">
+		<form class="col s12" action="#" id="form" th:action="@{/civilization/create}"  method="post" th:object="${civilization}">
+			<div class="row">
+				<div class="input-field col s6 offset-s3">
+					<input id="name" placeholder="England" type="text" class="validate" th:field="*{name}" />
+					<label class="active" for="name">Name</label>
+				</div>
+				<div class="input-field col s6 offset-s3">
+					<input id="demonym" placeholder="English" type="text" class="validate" th:field="*{demonym}" />
+					<label class="active" for="demonym">Demonym</label>
+				</div>
+				<div class="input-field col s12">
+					<input placeholder="Workshop of the World" type="text" class="validate" th:field="*{abilityName}" />
+					<label class="active" for="abilityName">Ability Name</label>
+				</div>
+				<div class="input-field col s12">
+					<textarea data-length="800" class="materialize-textarea" th:field="*{abilityDescription}" placeholder="Iron and Coal Mines accumulate +2 resources per turn. +100% Production towards Military..."></textarea>
+					<label class="active" for="abilityDescription">Ability Details</label>
+				</div>
+				<div class="input-field col s12">
+					<input placeholder="Sea Dog" type="text" class="validate" th:field="*{unitName}" />
+					<label class="active" for="unitName">Unit Name</label>
+				</div>
+				<div class="input-field col s12">
+					<textarea data-length="800" class="materialize-textarea" th:field="*{unitDescription}" placeholder="English unique Renaissance era naval unit that replaces the Privateer. Can capture..."></textarea>
+					<label class="active"  for="unitDescription">Unit Details</label>
+				</div>
+				<div class="input-field col s12">
+					<input placeholder="Royal Navy Dockyard" type="text" class="validate" th:field="*{infrastructureName}" />
+					<label class="active" for="infrastructureName">Infrastructure Name</label>
+				</div>
+				<div class="input-field col s12">
+					<textarea data-length="800" class="materialize-textarea" th:field="*{infrastructureDescription}" placeholder="A district unique to england for naval activity in your city. Replaces the Harbor..."></textarea>
+					<label class="active"  for="infrastructureDescription">Infrastructure Details</label>
+				</div>
+			</div>
+			<div class="row">
+				<button class="btn waves-effect waves-lift center col s2 offset-s5" type="submit" form="form" th:formaction="@{/civilization/create}" th:object="${civilization}">Submit
+				<i class="material-icons right">send</i>
+				</button>
+			</div>
+		</form>
+	</div>
+
+
+</div>
+
+<script type="text/javascript" th:src="@{/materialize/js/materialize.min.js}"></script>
+</body>
+</html>

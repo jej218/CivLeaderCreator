@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" th:href="@{/materialize/css/materialize.min.css}"  media="screen,projection"/>
+	<link type="text/css" rel="stylesheet" th:href="@{/css/navbar.css}" />
+   <script type="module" th:src="@{/js/new_combination.js}"></script>
+   
+   <title>Create a New Combination</title>
+</head>
+<body>
+<div class="navbar-fixed">
+	<nav>
+		<div class="nav-wrapper">
+			<a href="/home" class="brand-logo center tooltipped" data-position="bottom" data-tooltip="Return to Homepage"><i class="medium material-icons ">home</i></a>
+			<ul class="left hide-on-small-only">
+				<li><a href="/leader/index" class="tooltipped" data-position="bottom" data-tooltip="View all Leaders"><i class="medium material-icons ">record_voice_over</i></a></li>
+				<li><a href="/civilization/index" class="tooltipped" data-position="bottom" data-tooltip="View all Civilizations"><i class="medium material-icons ">account_balance</i></a></li>
+				<li><a href="/combination/index" class="tooltipped" data-position="bottom" data-tooltip="View all Combinations"><i class="medium material-icons ">merge</i></a></li>
+			</ul>
+			<ul class="right hide-on-small-only">
+				<li sec:authorize="isAuthenticated()"><a href="javascript: document.logoutForm.submit()" class="dropdown-toggle tooltipped" data-position="left" data-tooltip="Logout"><i class="medium material-icons ">logout</i></a></li>
+			</ul>
+			<form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+				<input hidden="true" type="submit" value="Sign Out" />	
+			</form>
+		</div>
+	</nav>
+</div>
+<div class="container">
+	<h1 class="center row">Create a Custom Combination</h1>
+	<div class="row">
+		<form class="col s12" action="#" id="form" th:action="@{/combination/create}"  method="post" th:object="${combinationDto}">
+			<div class="row">
+				<div class="input-field col s6 offset-s3">
+			    	<select th:field="*{leaderId}" class="center">
+			    		<option th:each="leader : ${leaders}" th:value="${leader.id}" th:text="${leader.name}"></option>
+					</select>
+				    <label>Leader</label>
+			    </div>
+			    <div class="input-field col s6 offset-s3">
+			    	<select th:field="*{civId}">
+			    		<option th:each="civilization : ${civilizations}" th:value="${civilization.id}" th:text="${civilization.name}"></option>
+					</select>
+				    <label>Civilization</label>
+			    </div>
+			    <div class="input-field col s6 offset-s3">
+			    	<select th:field="*{outerColorHexCode}" >
+			    		<option th:each="property : ${colors.COLORS}" class="outer-color" th:value="${property.value}" th:text="${property.key}" th:style="'background-color:#' + ${property.value}"></option>
+					</select>
+				    <label>Outer Color</label>
+			    </div>
+			    <div class="input-field col s6 offset-s3">
+			    	<select th:field="*{innerColorHexCode}" >
+			    		<option th:each="property : ${colors.COLORS}" class="inner-color" th:value="${property.value}" th:text="${property.key}" th:style="'background-color:#' + ${property.value}"></option>
+					</select>
+				    <label>Inner Color</label>
+			    </div>
+			</div>
+			<div class="row">
+				<button class="btn waves-effect waves-lift center col s2 offset-s5" type="submit" form="form" th:formaction="@{/combination/create}" th:object="${combinationDto}">Submit
+				<i class="material-icons right">send</i>
+				</button>
+			</div>
+		</form>
+	</div>
+
+
+</div>
+<script type="text/javascript" th:src="@{/materialize/js/materialize.min.js}"></script>
+</body>
+</html>
